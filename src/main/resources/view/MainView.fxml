@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.phonerecommend.view.MainViewController"
+            prefHeight="800.0" prefWidth="1200.0">
+
+    <!-- Top Panel - Header -->
+    <top>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15" />
+            </padding>
+
+            <!-- Title -->
+            <HBox alignment="CENTER">
+                <Label text="HỆ THỐNG GỢI Ý ĐIỆN THOẠI" style="-fx-font-weight: bold">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+            </HBox>
+
+            <!-- Search Bar -->
+            <HBox spacing="10" alignment="CENTER">
+                <TextField fx:id="searchField" promptText="Nhập tên điện thoại cần tìm..." HBox.hgrow="ALWAYS" />
+                <Button text="Tìm kiếm" onAction="#handleSearch" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Center Panel - Main Content -->
+    <center>
+        <SplitPane dividerPositions="0.25" VBox.vgrow="ALWAYS">
+            <!-- Left Side - Filters -->
+            <ScrollPane fitToWidth="true">
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+
+                    <Label text="CHỌN THEO TIÊU CHÍ" style="-fx-font-weight: bold">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+
+                    <!-- Nhu cầu sử dụng -->
+                    <TitledPane text="Nhu cầu sử dụng" expanded="false">
+                        <VBox spacing="5">
+                            <CheckBox fx:id="gamingCheckbox" text="Chơi game" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="longBatteryCheckbox" text="Pin trâu" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="highSpecCheckbox" text="Cấu hình cao" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="compactSizeCheckbox" text="Nhỏ gọn, dễ cầm" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="livestreamCheckbox" text="Livestream" onAction="#handleFilterChange" />
+                        </VBox>
+                    </TitledPane>
+
+                    <!-- Hãng sản xuất -->
+                    <TitledPane text="Hãng sản xuất" expanded="false">
+                        <VBox spacing="5">
+                            <CheckBox fx:id="samsungCheckbox" text="Samsung" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="appleCheckbox" text="Apple" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="oppoCheckbox" text="Oppo" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="xiaomiCheckbox" text="Xiaomi" onAction="#handleFilterChange" />
+                        </VBox>
+                    </TitledPane>
+
+                    <!-- Giá -->
+                    <TitledPane text="Giá" expanded="false">
+                        <VBox spacing="5">
+                            <RadioButton fx:id="priceRangeAll" text="Tất cả" selected="true" onAction="#handleFilterChange">
+                                <toggleGroup>
+                                    <ToggleGroup fx:id="priceGroup" />
+                                </toggleGroup>
+                            </RadioButton>
+                            <RadioButton fx:id="priceRangeUnder5M" text="Dưới 5 triệu" toggleGroup="$priceGroup" onAction="#handleFilterChange" />
+                            <RadioButton fx:id="priceRange5To10M" text="5 - 10 triệu" toggleGroup="$priceGroup" onAction="#handleFilterChange" />
+                            <RadioButton fx:id="priceRange10To15M" text="10 - 15 triệu" toggleGroup="$priceGroup" onAction="#handleFilterChange" />
+                            <RadioButton fx:id="priceRange15To20M" text="15 - 20 triệu" toggleGroup="$priceGroup" onAction="#handleFilterChange" />
+                            <RadioButton fx:id="priceRangeOver20M" text="Trên 20 triệu" toggleGroup="$priceGroup" onAction="#handleFilterChange" />
+                        </VBox>
+                    </TitledPane>
+
+                    <!-- Dung lượng RAM -->
+                    <TitledPane text="Dung lượng RAM" expanded="false">
+                        <VBox spacing="5">
+                            <CheckBox fx:id="ram4To6GBCheckbox" text="4-6 GB" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="ram8GBCheckbox" text="8 GB" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="ram8To12GBCheckbox" text="8-12 GB" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="ram12GBPlusCheckbox" text="12 GB trở lên" onAction="#handleFilterChange" />
+                        </VBox>
+                    </TitledPane>
+
+                    <!-- Chipset -->
+                    <TitledPane text="Chipset" expanded="false">
+                        <VBox spacing="5">
+                            <CheckBox fx:id="snapdragonCheckbox" text="Snapdragon" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="appleChipsetCheckbox" text="Apple A Series" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="exynosCheckbox" text="Exynos" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="mediatekHelioCheckbox" text="MediaTek Helio" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="mediatekDimensityCheckbox" text="MediaTek Dimensity" onAction="#handleFilterChange" />
+                        </VBox>
+                    </TitledPane>
+
+                    <!-- Tính năng camera -->
+                    <TitledPane text="Tính năng camera" expanded="false">
+                        <VBox spacing="5">
+                            <CheckBox fx:id="portraitCheckbox" text="Chụp xóa phông" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="wideAngleCheckbox" text="Chụp góc rộng" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="video4kCheckbox" text="Quay video 4K" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="stabilizationCheckbox" text="Chống rung" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="zoomCheckbox" text="Chụp zoom xa" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="nightModeCheckbox" text="Chụp đêm" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="macroCheckbox" text="Chụp macro" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="aiCameraCheckbox" text="Camera AI" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="motionPhotoCheckbox" text="Chụp ảnh chuyển động" onAction="#handleFilterChange" />
+                        </VBox>
+                    </TitledPane>
+
+                    <!-- Tính năng đặc biệt -->
+                    <TitledPane text="Tính năng đặc biệt" expanded="false">
+                        <VBox spacing="5">
+                            <CheckBox fx:id="support5GCheckbox" text="Hỗ trợ 5G" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="fingerprintCheckbox" text="Bảo mật vân tay" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="faceRecognitionCheckbox" text="Nhận diện khuôn mặt" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="waterResistantCheckbox" text="Kháng nước" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="dustResistantCheckbox" text="Kháng bụi" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="aiPhoneCheckbox" text="Điện thoại AI" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="wirelessChargingCheckbox" text="Sạc không dây" onAction="#handleFilterChange" />
+                            <CheckBox fx:id="stylusPenCheckbox" text="Đi kèm bút cảm ứng" onAction="#handleFilterChange" />
+                        </VBox>
+                    </TitledPane>
+
+                    <!-- Nút xóa bộ lọc -->
+                    <Button text="Xóa tất cả bộ lọc" onAction="#handleClearFilters" maxWidth="Infinity" />
+                </VBox>
+            </ScrollPane>
+
+            <!-- Right Side - Content -->
+            <VBox>
+                <!-- Result Controls -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+
+                    <Label text="Sắp xếp theo:" />
+                    <ComboBox fx:id="sortComboBox" onAction="#handleSort">
+                        <tooltip>
+                            <Tooltip text="Chọn tiêu chí sắp xếp" />
+                        </tooltip>
+                    </ComboBox>
+
+                    <Region HBox.hgrow="ALWAYS" />
+
+                    <Label fx:id="resultCountLabel" text="Tìm thấy 0 kết quả" />
+                </HBox>
+
+                <!-- Results -->
+                <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                    <Tab text="Kết quả tìm kiếm">
+                        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                            <GridPane fx:id="phoneGridPane" hgap="10" vgap="10">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10" />
+                                </padding>
+                            </GridPane>
+                        </ScrollPane>
+                    </Tab>
+
+                    <Tab text="Chi tiết sản phẩm">
+                        <BorderPane fx:id="detailPane">
+                            <center>
+                                <Label text="Chọn một sản phẩm để xem chi tiết" alignment="CENTER" />
+                            </center>
+                        </BorderPane>
+                    </Tab>
+
+                    <Tab text="Hỏi trợ lý ảo">
+                        <VBox spacing="10">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10" />
+                            </padding>
+
+                            <!-- Chat History -->
+                            <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+                                <VBox fx:id="chatHistoryBox" spacing="10" />
+                            </ScrollPane>
+
+                            <!-- Chat Input -->
+                            <HBox spacing="10">
+                                <TextField fx:id="chatInputField" promptText="Nhập câu hỏi..." HBox.hgrow="ALWAYS" onAction="#handleChatSend" />
+                                <Button text="Gửi" onAction="#handleChatSend" />
+                            </HBox>
+
+                            <!-- Suggested Questions -->
+                            <TitledPane text="Câu hỏi gợi ý">
+                                <FlowPane fx:id="suggestedQuestionsPane" hgap="10" vgap="10" />
+                            </TitledPane>
+                        </VBox>
+                    </Tab>
+                </TabPane>
+            </VBox>
+        </SplitPane>
+    </center>
+
+    <!-- Bottom Panel - Footer -->
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-background-color: #f0f0f0;">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <Label text="Hệ thống gợi ý điện thoại - © 2025" />
+        </HBox>
+    </bottom>
+
+</BorderPane>
